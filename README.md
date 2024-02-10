@@ -30,7 +30,7 @@ pip install customtkinter
 
 * Running the code without the GUI.
 ```
-python finalparser.py
+python main.py
 ```
 
 * You may edit the code in "sample.cash" to test
