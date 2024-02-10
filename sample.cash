@@ -1,0 +1,24 @@
+x = 5
+y = 5
+x+++
+display(y)
+z = x * y
+display(z)
+
+if y > 5:
+    display("y is not greater than 5")
+else:
+    display("y is greater than 5")
+
+for x in range(0, 3):
+    display(x)
+
+while x < 8:
+    display(x)
+    x++
+
+
+compound_interest(10000, 2, 1)
+
+y = 11
+display(y < 5 | y < 10)

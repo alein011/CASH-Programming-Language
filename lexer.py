@@ -14,9 +14,9 @@ To use the lexer:
 2. Call the `tokenize` method to obtain a list of Token objects.
 3. Optionally, you can run the `run` function to display the tokenized information in a pretty table and save it to a file.
 
-Example usage is provided at the end of the script, where a sample input code is tokenized and displayed.
+Example usage is provided at the end of the code, where a sample input code is tokenized and displayed.
 
-Note: Before running this script, make sure to download the required modules.
+Note: Before running this code, make sure to download the required modules.
 """
 
 
@@ -132,9 +132,9 @@ class Lexer:
         return lines
     
     def tokenize(self):
-        IDENTIFIER = r'(_*[a-zA-Z][a-zA-Z0-9]*(_[a-zA-Z0-9]+)*)+'
+        IDENTIFIER = r'\b(_*[a-zA-Z][a-zA-Z0-9]*(_[a-zA-Z0-9]+)*)\b'
         INT = r'[1-9]\d*'
-        FLOAT = r'[1-9]\d*\.\d+'
+        FLOAT = r'\d*\.\d+'
         STRING = r'(\"([^"\n]*)\")|(\'([^"\n]*)\')'
         
         # Compile the list of tokens and their associated info
@@ -296,15 +296,18 @@ class Lexer:
                 tokens.append(Token(token_type, lexeme, lineno, start, end, error))
                 index += 1          # increment to check the next character
 
-        print(tokens)
+        #print(tokens)
         return tokens
 
 
 
-def run(tokens):
+def run(cash_code):
+    
+    lexer = Lexer(cash_code)
+    tokens = lexer.tokenize()
     # sets the name of the file generated for the symbol table
     timestamp = datetime.now().strftime("%Y-%m-%d-%H%M")
-    output_file_path = f"Symbol Table_{timestamp}.cash"
+    output_file_path = f"symboltables/Symbol Table_{timestamp}.cash"
     
     
     # style of the symbol table
@@ -329,33 +332,12 @@ def run(tokens):
 
 
 # Example usage
-input_text = """
-x = 5
-y = 5
-display(y)
-z = x * y
-display(z)
-x+++
-if y > 5:
-    display("y is not greater than 5")
-else:
-    display("y is greater than 5)
+file = r'sample.cash'
+f = open(file, 'r')
+cash_code = f.read()
+print(cash_code)
 
-for x in range(0, 3):
-    display(x)
 
-while x < 8:
-    display(x)
-    x++
-compound_interest(10000, 2, 1)
-
-y = 11
-display(y < 5 | y < 10)
-# plot_cint([1000, 5, 10, 2], [1500, 3, 8, 4])
-
-"""
-lexer = Lexer(input_text)
-tokens = lexer.tokenize()
-run(tokens)
+run(cash_code)
 
 
